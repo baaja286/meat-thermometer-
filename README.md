@@ -1,5 +1,5 @@
 # meat-thermometer-
-meat therrmometer
+meat thermometer
 
 This is a project to make a wireless meat thermometer with alerting. 
 
