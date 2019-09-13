@@ -27,7 +27,7 @@ BLYNK_WRITE(21) //takes slider value from blynk app on virtual pin 21 and sends 
   pinData = param.asInt(); 
 }
 
-
+// get meat temp and write it to virtual pin
 
 void meatfunction()
 
@@ -36,7 +36,7 @@ void meatfunction()
   Blynk.virtualWrite(7, meat);
   Blynk.virtualWrite(8, meat);
 
-
+// notify if meat temp is higher than what is set on virtual pin 21
 
 if (meat > pinData) {
   Blynk.notify("meat at temp!");
@@ -44,4 +44,30 @@ if (meat > pinData) {
 }
 
 }
+
+
+
+
+void setup() {
+  WiFi.mode(WIFI_STA);
+  Serial.begin(115200);
+  Blynk.begin(AUTH, SSID, PASS);
+
+  Serial.write("Connected to Blynk");
+  // wait for MAX chip to stabilize
+  delay(500);
+  
+  timer.setInterval(1000L, meatfunction);
+}
+
+
+
+void loop() {
+  Blynk.run();
+  timer.run();
+}
+
+
+
+
 
